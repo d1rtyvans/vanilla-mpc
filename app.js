@@ -40,22 +40,23 @@ var gameOver = function(winner) {
 }
 
 var checkForWinner = function() {
-
   for (var i = 1; i <= 3; i++) {
     var row = getSection('row', i);
     var column = getSection('column', i);
+
+    if (i !== 3) {
+      var diag = getSection('diag', i);
+    }
 
     if (column.every(isXWinner) || column.every(isOWinner)) {
       gameOver();
     } else if (row.every(isXWinner) || row.every(isOWinner)) {
       gameOver();
+    } else if (diag.every(isXWinner) || diag.every(isOWinner)) {
+      return gameOver();
     }
   }
-
 }
-
-
-
 
 
 var getSection = function(section, index) {
