@@ -41,20 +41,20 @@ var gameOver = function(winner) {
 
 var checkForWinner = function() {
   for (var i = 1; i <= 3; i++) {
+    var winner = false;
     var row = getSection('row', i);
     var column = getSection('column', i);
 
-    if (i !== 3) {
+    if (i !== 3)
       var diag = getSection('diag', i);
-    }
 
-    if (column.every(isXWinner) || column.every(isOWinner)) {
-      gameOver();
-    } else if (row.every(isXWinner) || row.every(isOWinner)) {
-      gameOver();
-    } else if (diag.every(isXWinner) || diag.every(isOWinner)) {
-      return gameOver();
-    }
+    var sections = [row, column, diag];
+    sections.forEach(function(section) {
+      if (section.every(isXWinner) || section.every(isOWinner))
+        winner = true;
+    });
+
+    if (winner) return gameOver();
   }
 }
 
@@ -63,9 +63,8 @@ var getSection = function(section, index) {
   var currentSection = [];
   var tableSection = document.getElementsByClassName(section+'-'+index);
 
-  for (var i = 0; i < tableSection.length; i++) {
+  for (var i = 0; i < tableSection.length; i++)
     currentSection.push(tableSection[i].textContent);
-  }
 
   return currentSection;
 }
