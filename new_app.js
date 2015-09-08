@@ -17,8 +17,6 @@ Game.prototype.checkFrequencyOfX = function(section) {
     if (section[i].textContent === 'X') Xfreq ++;
   }
 
-  console.log(Xfreq);
-
   return Xfreq;
 }
 
@@ -51,6 +49,7 @@ Game.prototype.getBoard = function() {
 Game.prototype.pickTile = function() {
   var game = this;
   var middleCell = game.rows[1][1];
+  var turnOver = false;
 
   if (!middleCell.textContent.match(/[XO]/)) {
     return middleCell.textContent = 'O';
@@ -66,6 +65,12 @@ Game.prototype.pickTile = function() {
             return thisSection[i].textContent = 'O';
           }
         }
+      } else if (Xfreq === 1) {
+        // for (i = 0; i < thisSection.length; i++) {
+        //   if (!thisSection[i].textContent.match(/[XO]/)) {
+        //     return thisSection[i]
+        //   }
+        // }
       }
     });
   });
