@@ -65,12 +65,6 @@ Game.prototype.pickTile = function() {
             return thisSection[i].textContent = 'O';
           }
         }
-      } else if (Xfreq === 1) {
-        // for (i = 0; i < thisSection.length; i++) {
-        //   if (!thisSection[i].textContent.match(/[XO]/)) {
-        //     return thisSection[i]
-        //   }
-        // }
       }
     });
   });
@@ -99,7 +93,9 @@ Game.prototype.listenForClicks = function() {
         game.refreshBoard();
 
         setTimeout(function() {
-          game.pickTile();
+          var tile = game.findBestTile();
+          tile.textContent = 'O';
+          // game.pickTile();
           game.checkForWinner();
         }, 500);
       }
@@ -180,6 +176,50 @@ Game.prototype.checkSectionForWinner = function(section) {
       game.finishGame('lose');
     }
   });
+}
+
+
+
+
+
+
+
+Game.prototype.findBestTile = function() {
+  var game = this;
+  var tiles = document.querySelectorAll('td');
+  var tileHash = {};
+  var highXcount = 0;
+  var bestTile;
+
+  for (var i = 0; i < tiles.length; i++) {
+    if (!tiles[i].textContent.match(/[XO]/)) {
+      var tileSections = tiles[i].className
+      var tileSectionsArray = tiles[i].className.split(' ');
+
+      tileHash[tileSections] = 0;
+
+      tileSectionsArray.forEach(function(sectionName) {
+        var section = document.getElementsByClassName(sectionName);
+        tileHash[tileSections] += game.checkFrequencyOfX(section);
+      });
+
+      if (tileHash[tileSections] > highXcount) {
+        highXcount = tileHash[tileSections];
+      }
+    }
+  }
+
+  debugger
+
+
+  for (var i = 0; i < tiles.length; i++) {
+    var tileSections = tiles[i].className;
+
+    if (tileHash[tileSections] === highXcount) {
+      bestTile = document.getElementsByClassName(tileSections)[0];
+    }
+  }
+  return bestTile;
 }
 
 
