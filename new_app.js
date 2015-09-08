@@ -1,9 +1,27 @@
+
+
+
 function Game() {
   this.rows = this.getSections('row', 3);
   this.columns = this.getSections('column', 3);
   this.diags = this.getSections('diag', 2);
+  this.board = this.getBoard();
   this.gameOver = false;
 }
+
+
+Game.prototype.checkFrequencyOfX = function(section) {
+  var Xfreq = 0;
+
+  for (i = 0; i < section.length; i++) {
+    if (section[i].textContent === 'X') Xfreq ++;
+  }
+
+  console.log(Xfreq);
+
+  return Xfreq;
+}
+
 
 Game.prototype.getSections = function(section, index) {
   var sections = [];
@@ -14,6 +32,43 @@ Game.prototype.getSections = function(section, index) {
   }
 
   return sections;
+}
+
+Game.prototype.refreshBoard = function() {
+  this.board = this.getBoard();
+}
+
+Game.prototype.getBoard = function() {
+  var board = [
+    this.getSections('row', 3),
+    this.getSections('column', 3),
+    this.getSections('diag', 2)
+  ];
+
+  return board;
+}
+
+Game.prototype.pickTile = function() {
+  var game = this;
+  var middleCell = game.rows[1][1];
+
+  if (!middleCell.textContent.match(/[XO]/)) {
+    return middleCell.textContent = 'O';
+  }
+
+  game.board.forEach(function(section) {
+    section.forEach(function(thisSection) {
+      var Xfreq = game.checkFrequencyOfX(thisSection);
+      
+      if (Xfreq === 2) {
+        for (i = 0; i < thisSection.length; i++) {
+          if (!thisSection[i].textContent.match(/[XO]/)) {
+            return thisSection[i].textContent = 'O';
+          }
+        }
+      }
+    });
+  });
 }
 
 Game.prototype.markTile = function() {
@@ -36,8 +91,10 @@ Game.prototype.listenForClicks = function() {
       game.checkForWinner();
 
       if (!game.gameOver) {
+        game.refreshBoard();
+
         setTimeout(function() {
-          game.markTile();
+          game.pickTile();
           game.checkForWinner();
         }, 500);
       }
@@ -88,25 +145,38 @@ Game.prototype.finishGame = function(winner) {
   this.gameOver = true;
 }
 
-Game.prototype.checkSectionForWinner = function(section) {
-  var game = this;
+
+Game.prototype.getSectionsMarks = function(section) {
+  var sectionMarks = [];
 
   for (var i = 0; i < this[section].length; i++) {
-    var sectionMarks = [];
+    var marks = [];
     var currentSection = this[section][i];
   
     for (var n = 0; n < currentSection.length; n++) {
-      sectionMarks.push(currentSection[n].textContent);
+      marks.push(currentSection[n].textContent);
     }
 
-    if (sectionMarks.every(this.isPlayerWinner)) {
-      game.finishGame('win');
-    } else if (sectionMarks.every(this.isGameWinner)) {
-      game.finishGame('lose');
-    }
+    sectionMarks.push(marks);
   }
 
+  return sectionMarks;
 }
+
+
+Game.prototype.checkSectionForWinner = function(section) {
+  var game = this;
+  var marks = game.getSectionsMarks(section);
+
+  marks.forEach(function(sectionMarks) {
+    if (sectionMarks.every(game.isPlayerWinner)) {
+      game.finishGame('win');
+    } else if (sectionMarks.every(game.isGameWinner)) {
+      game.finishGame('lose');
+    }
+  });
+}
+
 
 
 
