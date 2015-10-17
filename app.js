@@ -4,8 +4,6 @@ window.onkeypress = function(event) {
 }
 
 window.onclick = function(event) {
-  var audio = event.target.children[0];
-  var audioClass = audio.className;
-
-  if (audioClass === 'drum-sample') MPC.triggerAudio(audio);
+  var audioClass = event.target.children[0].className;
+  if (audioClass === 'drum-sample') MPC.triggerPad(event.target);
 }

@@ -1,7 +1,4 @@
 var MPC = (function() {
-  var api = {};
-
-
 
   // Private interface
   var keys = ['j','k','l','f','g','h','a','s','d'];
@@ -9,10 +6,7 @@ var MPC = (function() {
 
   function assignKeyToPad(index) {
     var pad = board[index]
-    var audio = pad.children[0];
-
-    togglePadColor(pad);
-    api.triggerAudio(audio);
+    api.triggerPad(pad);
   }
 
   function togglePadColor(pad) {
@@ -25,15 +19,7 @@ var MPC = (function() {
     }
   }
 
-
-
-
-  // Public interface
-  keys.forEach(function(key, index) {
-    api[key] = function() { assignKeyToPad(index) };
-  });
-
-  api.triggerAudio = function(audio) {
+  function triggerAudio(audio) {
     if (audio.paused) {
       audio.play();
     } else {
@@ -41,6 +27,23 @@ var MPC = (function() {
       audio.currentTime = 0;
       audio.play();
     }
+  }
+
+
+
+
+
+  // Public interface
+  var api = {};
+  
+  keys.forEach(function(key, index) {
+    api[key] = function() { assignKeyToPad(index) };
+  });
+
+  api.triggerPad = function(pad) {
+    var audio = pad.children[0];
+    togglePadColor(pad);
+    triggerAudio(audio);
   }
 
 
