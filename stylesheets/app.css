@@ -1,7 +1,14 @@
+table {
+  position: relative;
+  width: 325px;
+  height: 325px;
+  top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 td {
   border: 2px solid black;
-  width: 100px;
-  height: 100px;
 }
 
 .bgc-r {
