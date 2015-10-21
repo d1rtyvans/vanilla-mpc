@@ -14,6 +14,13 @@ var MPC = (function() {
     triggerAudio(audio);
   }
 
+  exports.wrongKey = function() {
+    var audio = document.getElementById('missing')
+    triggerAudio(audio);
+    lightUpMPC();
+  }
+
+
   // private
   function assignKeyToPad(index) {
     var pad = board[index]
@@ -27,6 +34,12 @@ var MPC = (function() {
       pad.classList.remove('bgc-r');
       setTimeout(function() { pad.classList.add('bgc-r') }, 100);
     }
+  }
+
+  function lightUpMPC() {
+    var pads = document.getElementsByClassName('drum-pad');
+    for (var i = 0; i < pads.length; i++)
+      togglePadColor(pads[i]);
   }
 
   function triggerAudio(audio) {
@@ -48,7 +61,10 @@ var MPC = (function() {
 
 window.onkeypress = function(event) {
   var letter = String.fromCharCode(event.charCode).toLowerCase();
-  MPC[letter]();
+  if (MPC[letter])
+    MPC[letter]();
+  else
+    MPC.wrongKey();
 }
 
 window.onclick = function(event) {
