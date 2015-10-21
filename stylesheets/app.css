@@ -1,8 +1,25 @@
-table {
+/** {
+  border: 2px solid red;
+}*/
+
+@font-face {
+  font-family: 'Code';
+  font-style: normal;
+  font-weight: normal;
+  src: local('Code'), url('./code_bold.otf') format('opentype');
+}
+body {
+  font-family: 'Code', serif;
+}
+
+div.container {
+  position: relative;
+  top: 100px;
+}
+table#drum-kit {
   position: relative;
   width: 325px;
   height: 325px;
-  top: 100px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -13,4 +30,26 @@ td {
 
 .bgc-r {
   background-color: #FF6961;
+}
+
+.c-r {
+  color: #FF6961;
+}
+
+#instruction-container {
+  position: relative;
+  top: 50px;
+  display: table;
+  margin: auto;
+}
+
+div#drum-keys {
+  position: relative;
+  text-align: center;
+}
+
+#drum-keys table td{
+  border: none;
+  padding: 0px 30px;
+  font-size: 2em;
 }
