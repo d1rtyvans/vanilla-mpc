@@ -1,6 +1,9 @@
 var MPC = (function() {
   var exports = {};
 
+  var keys = ['j','k','l','f','g','h','a','s','d'];
+  var board = document.getElementsByClassName('drum-pad');
+
   keys.forEach(function(key, index) {
     exports[key] = function() { assignKeyToPad(index) };
   });
@@ -12,16 +15,12 @@ var MPC = (function() {
   }
 
   // private
-  var keys = ['j','k','l','f','g','h','a','s','d'];
-  var board = document.getElementsByClassName('drum-pad');
-
   function assignKeyToPad(index) {
     var pad = board[index]
     exports.triggerPad(pad);
   }
 
   function togglePadColor(pad) {
-    // convert classList into array
     var classList = String(pad.classList).split(' ');
 
     if (classList.indexOf('bgc-r')) {
