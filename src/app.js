@@ -64,23 +64,16 @@ window.onkeypress = function(event) {
   var letter = String.fromCharCode(event.charCode).toLowerCase();
   if (MPC[letter]) {
     MPC[letter]();
-    animateLetter(letter);
+    lightUpLetter(letter);
   } else {
     MPC.wrongKey();
-    lightUpLetters();
+    lightUpAllLetters();
   }
 }
 
 // for when user clicks
 function playSample() {
-  var audioClass = event.target.children[0].className;
-  if (audioClass === 'drum-sample') MPC.triggerPad(event.target);
-}
-
-
-function animateLetter(letter) {
-  var el = document.getElementById(letter);
-  toggleLetterColor(el);
+  MPC.triggerPad(event.target);
 }
 
 function toggleLetterColor(el) {
@@ -89,7 +82,12 @@ function toggleLetterColor(el) {
   setTimeout(function() { el.classList.remove('c-r') }, 100);
 }
 
-function lightUpLetters() {
+function lightUpLetter(letter) {
+  var el = document.getElementById(letter);
+  toggleLetterColor(el);
+}
+
+function lightUpAllLetters() {
   var letters = document.getElementsByClassName('drum-letters');
   for (var i = 0; i < letters.length; i++)
     toggleLetterColor(letters[i]);
