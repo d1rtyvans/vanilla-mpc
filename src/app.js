@@ -5,10 +5,11 @@ var MPC = (function() {
   var board = document.getElementsByClassName('drum-pad');
 
   keys.forEach(function(key, index) {
-    exports[key] = function() { assignKeyToPad(index) };
+    exports[key] = function () { assignKeyToPad(index) };
   });
 
   exports.triggerPad = function(pad) {
+
     var audio = pad.children[0];
     togglePadColor(pad);
     triggerAudio(audio);
@@ -61,14 +62,33 @@ var MPC = (function() {
 
 window.onkeypress = function(event) {
   var letter = String.fromCharCode(event.charCode).toLowerCase();
-  if (MPC[letter])
+  if (MPC[letter]) {
     MPC[letter]();
-  else
+    lightUpLetter(letter);
+  } else {
     MPC.wrongKey();
+    lightUpAllLetters();
+  }
 }
 
-window.onclick = function(event) {
-  var audioClass = event.target.children[0].className;
-  if (audioClass === 'drum-sample') MPC.triggerPad(event.target);
+// for when user clicks
+function playSample() {
+  MPC.triggerPad(event.target);
 }
 
+function toggleLetterColor(el) {
+  var classList = String(el.classList).split(' ');
+  el.classList.add('c-r');
+  setTimeout(function() { el.classList.remove('c-r') }, 100);
+}
+
+function lightUpLetter(letter) {
+  var el = document.getElementById(letter);
+  toggleLetterColor(el);
+}
+
+function lightUpAllLetters() {
+  var letters = document.getElementsByClassName('drum-letters');
+  for (var i = 0; i < letters.length; i++)
+    toggleLetterColor(letters[i]);
+}

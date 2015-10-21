@@ -5,41 +5,62 @@
   <title>VanillaMPC</title>
 </head>
 <body>
-  <table>
-    <tr>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/perc_1.mp3" preload="preload"></audio>
-      </td>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/perc_2.mp3" preload="preload"></audio>
-      </td>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/808_1.mp3" preload="preload"></audio>
-      </td>
-    </tr>
-    <tr>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/clap_2.mp3" preload="preload"></audio>
-      </td>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/hat_1.mp3" preload="preload"></audio>
-      </td>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/hat_2.mp3" preload="preload"></audio>
-      </td>
-    </tr>
-    <tr>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/kick_1.mp3" preload="preload"></audio>
-      </td>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/kick_2.mp3" preload="preload"></audio>
-      </td>
-      <td class="drum-pad bgc-r">
-        <audio class="drum-sample" src="./samples/clap_1.mp3" preload="preload"></audio>
-      </td>
-    </tr>
-  </table>
+  <div class="container">
+    <table id="drum-kit">
+      <tr>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/perc_1.mp3" preload="preload"></audio>
+        </td>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/perc_2.mp3" preload="preload"></audio>
+        </td>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/808_1.mp3" preload="preload"></audio>
+        </td>
+      </tr>
+      <tr>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/clap_2.mp3" preload="preload"></audio>
+        </td>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/hat_1.mp3" preload="preload"></audio>
+        </td>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/hat_2.mp3" preload="preload"></audio>
+        </td>
+      </tr>
+      <tr>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/kick_1.mp3" preload="preload"></audio>
+        </td>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/kick_2.mp3" preload="preload"></audio>
+        </td>
+        <td class="drum-pad bgc-r" onclick="playSample()">
+          <audio class="drum-sample" src="./samples/clap_1.mp3" preload="preload"></audio>
+        </td>
+      </tr>
+    </table>
+    <div id="instruction-container">
+      <div id="drum-keys">
+        <table>
+          <tbody>
+            <tr>
+              <td id="a" class="drum-letters">a</td>
+              <td id="s" class="drum-letters">s</td>
+              <td id="d" class="drum-letters">d</td>
+              <td id="f" class="drum-letters">f</td>
+              <td id="g" class="drum-letters">g</td>
+              <td id="h" class="drum-letters">h</td>
+              <td id="j" class="drum-letters">j</td>
+              <td id="k" class="drum-letters">k</td>
+              <td id="l" class="drum-letters">l</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
   <!-- missing key sound -->
   <audio id="missing" src="./samples/missing.mp3" preload="preload"></audio>
   <script type="text/javascript" src="src/app.js"></script>
