@@ -1,16 +1,15 @@
 var MPC = (function() {
-  var api = {};
+  var exports = {};
 
   keys.forEach(function(key, index) {
-    api[key] = function() { assignKeyToPad(index) };
+    exports[key] = function() { assignKeyToPad(index) };
   });
 
-  api.triggerPad = function(pad) {
+  exports.triggerPad = function(pad) {
     var audio = pad.children[0];
     togglePadColor(pad);
     triggerAudio(audio);
   }
-
 
   // private
   var keys = ['j','k','l','f','g','h','a','s','d'];
@@ -18,7 +17,7 @@ var MPC = (function() {
 
   function assignKeyToPad(index) {
     var pad = board[index]
-    api.triggerPad(pad);
+    exports.triggerPad(pad);
   }
 
   function togglePadColor(pad) {
@@ -41,7 +40,7 @@ var MPC = (function() {
     }
   }
 
-  return api;
+  return exports;
 
 })();
 
