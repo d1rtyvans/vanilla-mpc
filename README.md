@@ -1,7 +1,7 @@
 # Vanilla MPC
 Play drums [here](https://vanilla-mpc.herokuapp.com)
 
-![](images/pads_lit.png)
+![](images/preview.png)
 
 ### Contributing to Vanilla MPC
 + fork and clone repo
