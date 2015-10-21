@@ -1,0 +1,19 @@
+{
+  "name": "vanilla-mpc",
+  "version": "1.0.0",
+  "description": "mpc play sum muzikz",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Yago580/vanilla-mpc.git"
+  },
+  "author": "Yag",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yago580/vanilla-mpc/issues"
+  },
+  "homepage": "https://github.com/Yago580/vanilla-mpc#readme"
+}
