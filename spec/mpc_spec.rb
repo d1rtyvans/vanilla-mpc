@@ -1,4 +1,3 @@
-# require 'rspec'
 require 'capybara/rspec'
 
 Capybara.register_driver :selenium do |app|
